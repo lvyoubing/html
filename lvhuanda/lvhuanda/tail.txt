@@ -1,0 +1,8 @@
+new BMap.Point(111.768983,40.844801)],
+{strokeColor:"red", strokeWeight:5, strokeOpacity:0.5} 
+); 
+map.addOverlay(polyline);
+map.centerAndZoom(point, 10); 
+</script>
+</body>
+</html>

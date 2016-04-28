@@ -159,9 +159,10 @@ void ClvhuandaDlg::OnBnClickedread()
 {
 	//
 	CFile gpx;
-	gpx.Open(L"G:\\程序\\export.gpx", CFile::modeRead);
+	gpx.Open(L"D:\\export.gpx", CFile::modeRead);
 	//判断打开成功与否
-	if (!gpx)
+	if (!gpx)                                        
+
 	{
 		MessageBox(L"读取文件失败！");
 		return;
@@ -174,7 +175,7 @@ void ClvhuandaDlg::OnBnClickedread()
 
 
 	CFile html;
-	html.Open(L"G:\\程序\\data.html", CFile::modeCreate | CFile::modeReadWrite);
+	html.Open(L"D:\\data.html", CFile::modeCreate | CFile::modeReadWrite);
 	if (!html)
 	{
 		MessageBox(L"写入文件失败！");
@@ -188,7 +189,7 @@ void ClvhuandaDlg::OnBnClickedread()
 
 
 	CFile head;
-	head.Open(L"G:\\程序\\head.txt", CFile::modeRead);
+	head.Open(L"D:\\head.txt", CFile::modeRead);
 	int a;
 	a = head.GetLength();
 	char *Q;
@@ -214,8 +215,8 @@ void ClvhuandaDlg::OnBnClickedread()
 
 
 	CFile csv;
-	csv.Open(L"G:\\程序\\export.csv",CFile::modeCreate | CFile::modeReadWrite);
-	while (I<(L - 94))//
+	csv.Open(L"D:\\export.csv",CFile::modeCreate | CFile::modeReadWrite);
+	while (I<(L-94))//
 	{
 		html.Write("new BMap.Point(", C);
 		lon = R.Mid(I + 27, 10);//lon 经度
@@ -224,13 +225,13 @@ void ClvhuandaDlg::OnBnClickedread()
 		lat = R.Mid(I + 11, 9);
 		html.Write((char*)(_bstr_t)lat, 9);
 		html.Write(")", 1);
-		if (i != 4979)//
-			html.Write(L",", 1);
+		if (i != 4979)
+			html.Write(L",],", 1);
 		else
 		{
 			html.Write("\r\n", 1);
 		}
-	     csv.Write((char*)(_bstr_t)lon, 10);
+	    csv.Write((char*)(_bstr_t)lon, 10);
 		csv.Write(L",", 1);
 		csv.Write((char*)(_bstr_t)lat, 9);
 		csv.Write(L",", 1);
@@ -247,16 +248,16 @@ void ClvhuandaDlg::OnBnClickedread()
 	
 
 	CFile tail;
-	tail.Open(L"G:\\程序\\tail.txt", CFile::modeRead);
+	tail.Open(L"D:\\tail.txt", CFile::modeRead);
 	char *y;
 	int Y = tail.GetLength();
 	y = new char[Y + 1];
 	y[Y] = 0;
 	tail.Read(y, Y);
 	html.Write(y, Y);
-	brower.Navigate(L"G:\\程序\\data.html",NULL,NULL,NULL,NULL);
+	brower.Navigate(L"D:\\data.html",NULL,NULL,NULL,NULL);
 	gpx.Close();
 	html.Close();
 	head.Close();
-	tail.Close();// TODO: 在此添加控件通知处理程序代码
+	tail.Close();
 }
